@@ -66,8 +66,8 @@ private:
 	void ConvertValorPoints(CurrencyData& data, ConvertData& convertData);
 	void ConvertConquestPoints(CurrencyData& data, ConvertData& convertData);
 
-	std::uint32_t CalculateCopperValuePvE(std::uint32_t points);
-	std::uint32_t CalculateCopperValuePvP(std::uint32_t points);
+	std::uint32_t CalculateCopperValuePvE(std::uint32_t points) const;
+	std::uint32_t CalculateCopperValuePvP(std::uint32_t points) const;
 
 	MoneyMail ConvertCopperToMoney(std::uint32_t copper);
 

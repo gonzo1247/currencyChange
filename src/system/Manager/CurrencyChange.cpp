@@ -240,7 +240,7 @@ void CurrencyChange::ConvertConquestPoints(CurrencyData& data, ConvertData& conv
 	}
 }
 
-std::uint32_t CurrencyChange::CalculateCopperValuePvE(std::uint32_t points)
+std::uint32_t CurrencyChange::CalculateCopperValuePvE(std::uint32_t points) const
 {
 	// Divide points by 100
 	std::uint32_t adjustedPoints = points / 100;
@@ -251,7 +251,7 @@ std::uint32_t CurrencyChange::CalculateCopperValuePvE(std::uint32_t points)
 	return totalCopper;
 }
 
-std::uint32_t CurrencyChange::CalculateCopperValuePvP(std::uint32_t points)
+std::uint32_t CurrencyChange::CalculateCopperValuePvP(std::uint32_t points) const
 {
 	// Divide points by 100
 	std::uint32_t adjustedPoints = points / 100;
