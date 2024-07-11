@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1097</width>
-    <height>629</height>
+    <width>1158</width>
+    <height>815</height>
    </rect>
   </property>
   <property name="font">
@@ -18,22 +18,51 @@
   <property name="windowTitle">
    <string>WoWCurrencyChangeOrReplace</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../../WoWCurrencyChangeOrReplace.qrc">
+    <normaloff>:/Icons/Icons/WoW_Cataclysm_Icon.ico</normaloff>:/Icons/Icons/WoW_Cataclysm_Icon.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel
+{
+	color: rgb(170, 96, 23);
+}
+QWidget
+{
+background-color: rgb(83, 83, 83);
+}
+QLineEdit
+{
+	background-color: rgb(194, 194, 194);
+	color: rgb(0, 0, 0);
+
+}
+QPlainTextEdit
+{
+	background-color: rgb(194, 194, 194);
+color: rgb(0, 0, 0);
+}
+QComboBox
+{
+	background-color: rgb(194, 194, 194);
+color: rgb(0, 0, 0);
+}
+QComboBox::item {
+    background-color: rgb(194, 194, 194);
+color: rgb(0, 0, 0);
+}
+QComboBox QAbstractItemView {
+    background-color: rgb(194, 194, 194);
+color: rgb(0, 0, 0);
+}
+QPushButton
+{
+background-color: rgb(170, 0, 0);
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="2" column="2">
-     <spacer name="horizontalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="3" column="1">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="1">
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Orientation::Vertical</enum>
@@ -46,24 +75,89 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="1">
-     <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="3">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="2" rowspan="2">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="3" column="1">
+       <widget class="QLabel" name="lb_pvpMailMessage">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Mail Message</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lb_pveBoddy">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Mail Subject</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lb_pvpConvertMessage">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>PvP Convert Message</string>
+        </property>
+       </widget>
+      </item>
       <item row="4" column="1">
-       <widget class="QLabel" name="lb_goldPve">
-        <property name="text">
-         <string>Gold</string>
+       <widget class="QPlainTextEdit" name="pTE_pvPMailMessage">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To enter a line break, please enter $B$B.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="tabChangesFocus">
+         <bool>true</bool>
+        </property>
+        <property name="plainText">
+         <string>Hello $N,$B$B the next Arena Season is just around the corner. Therefore your conquest points, which are above the maximum of 4000 honor points, have now been converted into gold. $B$B You will therefore receive: {} Gold, {} Silver, {} Copper. $B$B Greetings, $B$B Your RoA Team.</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="1">
-       <widget class="QLabel" name="lb_copperPvE">
+      <item row="2" column="0">
+       <widget class="QLineEdit" name="le_pveMailSubject">
         <property name="text">
-         <string>Copper</string>
+         <string>Conversion of Valor Points</string>
+        </property>
+        <property name="maxLength">
+         <number>255</number>
         </property>
        </widget>
       </item>
-      <item row="10" column="4">
-       <widget class="QLabel" name="lb_changeMoney">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lb_pveConvertMessage">
         <property name="font">
          <font>
           <family>Arial</family>
@@ -73,44 +167,103 @@
          </font>
         </property>
         <property name="text">
-         <string>Money Update Data</string>
+         <string>PvE Convert Message</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="3">
-       <widget class="QLineEdit" name="le_goldPvP"/>
-      </item>
-      <item row="11" column="3">
-       <widget class="QLabel" name="lb_dataPvP">
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="le_pvpMailSubject">
         <property name="text">
-         <string>Changed Data P</string>
+         <string>Conversion of conquest points</string>
+        </property>
+        <property name="maxLength">
+         <number>255</number>
         </property>
        </widget>
       </item>
-      <item row="6" column="3">
-       <widget class="QLabel" name="lb_silverPvP">
-        <property name="text">
-         <string>Silver</string>
+      <item row="4" column="0">
+       <widget class="QPlainTextEdit" name="pTE_pveMailMessage">
+        <property name="toolTip">
+         <string>To enter a line break, please enter $B$B.</string>
+        </property>
+        <property name="tabChangesFocus">
+         <bool>true</bool>
+        </property>
+        <property name="plainText">
+         <string>Hello $N,$B$B your Valor Points have been converted to Justice Points. However, since you have exceeded the limit of 4000 justice points, the excess points have been converted to gold. $B$B You will therefore receive: {} gold, {} silver, {} copper. $B$B Greetings, $B$B Your ....</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
-       <widget class="QLineEdit" name="le_silverPvE"/>
-      </item>
-      <item row="10" column="3">
-       <widget class="QLabel" name="lb_changePvP">
+      <item row="3" column="0">
+       <widget class="QLabel" name="lb_pveMailMessage">
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>10</pointsize>
           <italic>true</italic>
           <bold>true</bold>
          </font>
         </property>
         <property name="text">
-         <string>Changed Data PvP</string>
+         <string>Mail Message</string>
         </property>
        </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lb_pvpSubject">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Mail Mail Subject</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>7</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Note: The order of the information on the gold received&lt;/p&gt;&lt;p&gt;must be followed as shown in the example!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Note: The order of the information on the gold received&lt;/p&gt;&lt;p&gt;must be followed as shown in the example!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="7" column="3">
+       <widget class="QLineEdit" name="le_silverPvP"/>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="le_goldPvE"/>
       </item>
       <item row="12" column="2">
        <widget class="QPushButton" name="pB_startConvert">
@@ -120,79 +273,23 @@
           <height>0</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Start Convert</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" colspan="3">
-       <widget class="QLabel" name="lb_Header">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>12</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
+      <item row="11" column="0">
+       <widget class="QLabel" name="lb_dataLoading">
         <property name="text">
-         <string>WoW Cataclysm Currency Update for Patch Change</string>
+         <string>Data</string>
         </property>
        </widget>
-      </item>
-      <item row="1" column="2">
-       <spacer name="verticalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="9" column="3">
-       <widget class="QLineEdit" name="le_copperPvP"/>
-      </item>
-      <item row="10" column="0">
-       <widget class="QLabel" name="lb_loadedData">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>10</pointsize>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Loaded Data</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="le_goldPvE"/>
-      </item>
-      <item row="7" column="3">
-       <widget class="QLineEdit" name="le_silverPvP"/>
-      </item>
-      <item row="10" column="1" colspan="2">
-       <widget class="QLabel" name="lb_changedPvE">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>10</pointsize>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Changed Data PvE</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="1">
-       <widget class="QLineEdit" name="le_copperPvE"/>
       </item>
       <item row="3" column="1" colspan="2">
        <widget class="QLabel" name="lb_moneyPvE">
@@ -209,8 +306,28 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="3">
-       <widget class="QLabel" name="lb_moneyPvP">
+      <item row="1" column="2">
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lb_goldPve">
+        <property name="text">
+         <string>Gold</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="lb_loadedData">
         <property name="font">
          <font>
           <family>Arial</family>
@@ -220,49 +337,17 @@
          </font>
         </property>
         <property name="text">
-         <string>Money Convert PvP</string>
+         <string>Loaded Data</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
-       <widget class="QLabel" name="lb_silverPvE">
-        <property name="text">
-         <string>Silver</string>
-        </property>
-       </widget>
+      <item row="5" column="3">
+       <widget class="QLineEdit" name="le_goldPvP"/>
       </item>
-      <item row="11" column="4">
-       <widget class="QLabel" name="lb_dataMoney">
+      <item row="11" column="3">
+       <widget class="QLabel" name="lb_dataPvP">
         <property name="text">
-         <string>Data</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="0">
-       <widget class="QLabel" name="lb_dataLoading">
-        <property name="text">
-         <string>Data</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="3">
-       <widget class="QLabel" name="lb_goldPvP">
-        <property name="text">
-         <string>Gold</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="1">
-       <widget class="QLabel" name="lb_dataPvE">
-        <property name="text">
-         <string>Data</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="3">
-       <widget class="QLabel" name="lb_copperPvP">
-        <property name="text">
-         <string>Copper</string>
+         <string>Changed Data P</string>
         </property>
        </widget>
       </item>
@@ -280,6 +365,34 @@
          <string>Currency to Update</string>
         </property>
        </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLabel" name="lb_copperPvE">
+        <property name="text">
+         <string>Copper</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLineEdit" name="le_copperPvE"/>
+      </item>
+      <item row="10" column="3">
+       <widget class="QLabel" name="lb_changePvP">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Changed Data PvP</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="3">
+       <widget class="QLineEdit" name="le_copperPvP"/>
       </item>
       <item row="4" column="0" rowspan="2">
        <widget class="QComboBox" name="cB_currency">
@@ -300,6 +413,60 @@
         </item>
        </widget>
       </item>
+      <item row="10" column="1" colspan="2">
+       <widget class="QLabel" name="lb_changedPvE">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Changed Data PvE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="1">
+       <widget class="QLabel" name="lb_dataPvE">
+        <property name="text">
+         <string>Data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QLineEdit" name="le_mailDatabaseID"/>
+      </item>
+      <item row="10" column="4">
+       <widget class="QLabel" name="lb_changeMoney">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Money Update Data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="3">
+       <widget class="QLabel" name="lb_Header">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>WoW Cataclysm Currency Update for Patch Change</string>
+        </property>
+       </widget>
+      </item>
       <item row="3" column="4">
        <widget class="QLabel" name="lb_mailDBID">
         <property name="font">
@@ -315,51 +482,62 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="4">
-       <widget class="QLineEdit" name="le_mailDatabaseID"/>
+      <item row="3" column="3">
+       <widget class="QLabel" name="lb_moneyPvP">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Money Convert PvP</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="3">
+       <widget class="QLabel" name="lb_silverPvP">
+        <property name="text">
+         <string>Silver</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLabel" name="lb_silverPvE">
+        <property name="text">
+         <string>Silver</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="lb_goldPvP">
+        <property name="text">
+         <string>Gold</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="3">
+       <widget class="QLabel" name="lb_copperPvP">
+        <property name="text">
+         <string>Copper</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="4">
+       <widget class="QLabel" name="lb_dataMoney">
+        <property name="text">
+         <string>Data</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="le_silverPvE"/>
       </item>
      </layout>
     </item>
-    <item row="2" column="0">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="2">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="1">
+    <item row="4" column="2">
      <spacer name="verticalSpacer_2">
       <property name="orientation">
        <enum>Qt::Orientation::Vertical</enum>
@@ -380,8 +558,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1097</width>
-     <height>20</height>
+     <width>1158</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDetails">

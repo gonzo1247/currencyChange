@@ -21,6 +21,7 @@ public:
 
 	void AbortProgrammOnMySQLConnectionError();
 private:
+	void LoadTranslation();
 	void LoadStyle();
 	void CheckMySQLConnection();
 	void SendPing();

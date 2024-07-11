@@ -1,4 +1,9 @@
 <RCC>
-    <qresource prefix="WoWCurrencyChangeOrReplace">
-    </qresource>
+  <qresource prefix="WoWCurrencyChangeOrReplace"/>
+  <qresource prefix="Translation">
+    <file>Translation/Translation_de_DE.qm</file>
+  </qresource>
+  <qresource prefix="Icons">
+    <file>Icons/WoW_Cataclysm_Icon.ico</file>
+  </qresource>
 </RCC>

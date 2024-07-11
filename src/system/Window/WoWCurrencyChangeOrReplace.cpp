@@ -1,6 +1,9 @@
 
 #include <QIntValidator>
 #include <QMessageBox>
+#include <QPlainTextEdit>
+#include <QString>
+#include <QRegularExpression>
 
 #include "WoWCurrencyChangeOrReplace.h"
 
@@ -25,7 +28,8 @@ _settings(settings), _connection(connection), ui(std::make_unique<Ui::WoWCurrenc
     QList<QLineEdit*> lines = findChildren<QLineEdit*>();
 
     for (QLineEdit* lineEdit : lines)
-        lineEdit->setText("0");
+		if (lineEdit->objectName() != "le_pveMailSubject" && lineEdit->objectName() != "le_pvpMailSubject")
+			lineEdit->setText("0");
 
     connect(ui->pB_startConvert, &QPushButton::clicked, this, &WoWCurrencyChangeOrReplace::OnPushStart);
     connect(ui->actionSettings, &QAction::triggered, this, &WoWCurrencyChangeOrReplace::OnPushSettings);
@@ -80,6 +84,8 @@ MoneyPvE WoWCurrencyChangeOrReplace::CollectPvEMoneyData()
     money._gold = ui->le_goldPvE->text().toInt();
     money._silver = ui->le_silverPvE->text().toInt();
     money._copper = ui->le_copperPvE->text().toInt();
+    money._MailSubject = ui->le_pveMailSubject->text().toStdString();
+    money._MailBoddy = ui->pTE_pveMailMessage->toPlainText().toStdString();
 
     return money;
 }
@@ -90,6 +96,8 @@ MoneyPvP WoWCurrencyChangeOrReplace::CollectPvPMoneyData()
 	money._gold = ui->le_goldPvP->text().toInt();
 	money._silver = ui->le_silverPvP->text().toInt();
 	money._copper = ui->le_copperPvP->text().toInt();
+	money._MailSubject = ui->le_pvpMailSubject->text().toStdString();
+    money._MailBoddy = ui->pTE_pvPMailMessage->toPlainText().toStdString();
 
 	return money;
 }

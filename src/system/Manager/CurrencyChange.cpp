@@ -115,11 +115,12 @@ void CurrencyChange::CreateSQLUpdateOutput(std::uint32_t mailID)
 			if (entry.second._moneyUpdatePvE > 1)
 			{
 				MoneyMail _mail = ConvertCopperToMoney(entry.second._moneyUpdatePvE);
+
+				std::string mailBoddy = replacePlaceholders(_moneyPvE._MailBoddy, _mail);
+
 				std::string MoneyPvEUpdate = std::format("INSERT INTO `mail` (`id`, `messageType`, `stationery`, `mailTemplateId`, `sender`, `receiver`, `subject`, `body`, `expire_time`, `deliver_time`, `money`) VALUES"
-					"({}, 0, 61, 0, 48668, {} 'Umwandlung Tapferkeitspunkte', 'Hallo,$B$B eure Tapferkeitspunkte wurden umgewandelt in Gerechtigkeitspunkte. Da ihr jedoch über das Limit von 4000 Gerechtigkeitspunkten "
-					" gekommen seid, wurden die überschüssigen Punkte in Gold umgewandelt. $B$B Ihr erhaltet daher: {} Gold, {} Silber, {} Kupfer. $B$B"
-					"Grüße, $B$B Euer RoA Team.' , {}, {}, {});",
-					_currentMailID, entry.first, _mail._gold, _mail._silver, _mail._copper, _timeMgr->GetThirtyDaysInFutureTimestamp(), _timeMgr->GetUnixTime(), entry.second._moneyUpdatePvE);
+					"({}, 0, 61, 0, 48668, {} '{}', '{}' , {}, {}, {});",
+					_currentMailID, entry.first, _moneyPvE._MailSubject, mailBoddy, _timeMgr->GetThirtyDaysInFutureTimestamp(), _timeMgr->GetUnixTime(), entry.second._moneyUpdatePvE);
 
 				outFile << "-- Valor / Justice Point Money Convert" << std::endl;
 				outFile << MoneyPvEUpdate << "\n";
@@ -128,11 +129,12 @@ void CurrencyChange::CreateSQLUpdateOutput(std::uint32_t mailID)
 			if (entry.second._moneyUpdatePvP > 1)
 			{
 				MoneyMail _mail = ConvertCopperToMoney(entry.second._moneyUpdatePvP);
+
+				std::string mailBoddy = replacePlaceholders(_moneyPvP._MailBoddy, _mail);
+
 				std::string MoneyPvPUpdate = std::format("INSERT INTO `mail` (`id`, `messageType`, `stationery`, `mailTemplateId`, `sender`, `receiver`, `subject`, `body`, `expire_time`, `deliver_time`, `money`) VALUES"
-					"({}, 0, 61, 0, 48668, {}, 'Umwandlung Ehrenpunkte', 'Hallo,$B$B die nächste Arena Season steht vor der Tür. Daher wurden nun eure Ehrenpunkte, welche über dem Maximum von 4000 Ehrenpunkte liegen in Gold umgewandelt. "
-					" $B$B Ihr erhaltet daher: {} Gold, {} Silber, {} Kupfer. $B$B"
-					"Grüße, $B$B Euer RoA Team.' , {}, {}, {});",
-					_currentMailID, entry.first, _mail._gold, _mail._silver, _mail._copper, _timeMgr->GetThirtyDaysInFutureTimestamp(), _timeMgr->GetUnixTime(), entry.second._moneyUpdatePvP);
+					"({}, 0, 61, 0, 48668, {}, '{}', '{}' , {}, {}, {});",
+					_currentMailID, entry.first, _moneyPvP._MailSubject, mailBoddy, _timeMgr->GetThirtyDaysInFutureTimestamp(), _timeMgr->GetUnixTime(), entry.second._moneyUpdatePvP);
 
 				outFile << "-- Conquest / Honor Point Money Convert" << std::endl;
 				outFile << MoneyPvPUpdate << "\n";
