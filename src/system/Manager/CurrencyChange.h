@@ -25,30 +25,54 @@ struct CurrencyData
 
 struct MoneyPvE
 {
-	std::uint32_t _gold = 0;
-	std::uint32_t _silver = 47;
-	std::uint32_t _copper = 0;
+	std::uint32_t _gold;
+	std::uint32_t _silver;
+	std::uint32_t _copper;
+	std::string _MailSubject;
+	std::string _MailBoddy;
+
+	MoneyPvE() :
+		_gold(0), _silver(47), _copper(0),
+		_MailBoddy(""),
+		_MailSubject("") {}
 };
 
 struct MoneyPvP
 {
-	std::uint32_t _gold = 0;
-	std::uint32_t _silver = 35;
-	std::uint32_t _copper = 0;
+	std::uint32_t _gold;
+	std::uint32_t _silver;
+	std::uint32_t _copper;
+	std::string _MailSubject;
+	std::string _MailBoddy;
+
+	MoneyPvP() :
+		_gold(0), _silver(35), _copper(0),
+		_MailBoddy(""),
+		_MailSubject("") {}
 };
 
 struct MoneyMail
 {
-	std::uint32_t _gold = 0;
-	std::uint32_t _silver = 35;
-	std::uint32_t _copper = 0;
+	std::uint32_t _gold;
+	std::uint32_t _silver;
+	std::uint32_t _copper;
+
+	MoneyMail() :
+		_gold(0),
+		_silver(35),
+		_copper(0) {}
 };
 
 struct ConvertData
 {
-	std::uint32_t _pveConvert = 0;
-	std::uint32_t _pvpConvert = 0;
-	std::uint32_t _moneyConvert = 0;
+	std::uint32_t _pveConvert;
+	std::uint32_t _pvpConvert;
+	std::uint32_t _moneyConvert;
+
+	ConvertData() :
+		_pveConvert(0),
+		_pvpConvert(0),
+		_moneyConvert(0) {}
 };
 
 class CurrencyChange
@@ -66,8 +90,11 @@ private:
 	void ConvertValorPoints(CurrencyData& data, ConvertData& convertData);
 	void ConvertConquestPoints(CurrencyData& data, ConvertData& convertData);
 
-	std::uint32_t CalculateCopperValuePvE(std::uint32_t points);
-	std::uint32_t CalculateCopperValuePvP(std::uint32_t points);
+	std::uint32_t CalculateCopperValuePvE(std::uint32_t points) const;
+	std::uint32_t CalculateCopperValuePvP(std::uint32_t points) const;
+
+	template <typename MoneyType>
+	std::string replacePlaceholders(const std::string& templateStr, const MoneyType& values);
 
 	MoneyMail ConvertCopperToMoney(std::uint32_t copper);
 
@@ -79,6 +106,26 @@ private:
 	std::shared_ptr<MySQLConnection> _connection;
 };
 
+template <typename MoneyType>
+std::string CurrencyChange::replacePlaceholders(const std::string& templateStr, const MoneyType& values)
+{
+	std::string result = templateStr;
+	std::size_t pos;
+
+	pos = result.find("{}");
+	if (pos != std::string::npos)
+		result.replace(pos, 2, std::to_string(values._gold));
+
+	pos = result.find("{}");
+	if (pos != std::string::npos)
+		result.replace(pos, 2, std::to_string(values._silver));
+
+	pos = result.find("{}");
+	if (pos != std::string::npos)
+		result.replace(pos, 2, std::to_string(values._copper));
+
+	return result;
+}
 
 /*
 // Print the results to verify

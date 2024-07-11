@@ -33,6 +33,7 @@ int MainFrame::StartFrameAndProgramm(int /*argc*/, char* /*argv*/[])
 	splash->show();
 	QApplication::processEvents();
 
+	LoadTranslation();
 	LoadStyle();
 
 	if (!_connection->GetExistConnection())
@@ -47,7 +48,7 @@ int MainFrame::StartFrameAndProgramm(int /*argc*/, char* /*argv*/[])
 	QTimer::singleShot(10, [&]()
 		{
 			//_mainWindow->LoadConstruktorData();
-			QTimer::singleShot(1000, [&]()
+			QTimer::singleShot(500, [&]()
 				{
 					_mainWindow->show();
 					splash->finish(_mainWindow.get());
@@ -73,6 +74,24 @@ void MainFrame::AbortProgrammOnMySQLConnectionError()
 }
 
 /********************* Private Functions ************************************/
+void MainFrame::LoadTranslation()
+{
+	QTranslator* translator = new QTranslator();
+	_translator = translator;
+	QLocale locale(QString::fromStdString(_settings->GetLanguage()));
+	QLocale::setDefault(locale);
+
+	QString translationsPath = QCoreApplication::applicationDirPath() + QString(":/Translation/Translation/");
+	translationsPath += QLocale::system().name();
+
+	qApp->addLibraryPath(translationsPath);
+
+	QString test = locale.name();
+
+	if (translator->load(":/Translation/Translation/Translation_" + locale.name() + ".qm"))
+		qApp->installTranslator(translator);
+}
+
 void MainFrame::LoadStyle()
 {
 	std::string filePathString = ":/Styles//StyleTheme/style_";
