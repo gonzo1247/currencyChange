@@ -1,4 +1,7 @@
 
+#define NOMINMAX
+
+#include <limits>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -60,7 +63,15 @@ std::uint32_t CurrencyChange::LoadCurrencyDataFromDatabase(LoadCurrency currency
 		}
 	}
 
-	return _currencyMapData.size();
+	size_t size = _currencyMapData.size();
+
+	if (size > std::numeric_limits<uint32_t>::max())
+	{
+		LOG_MISC("LoadCurrencyDataFromDatabase: Size exceeds uint32_t limits");
+		return 0;
+	}
+
+	return static_cast<uint32_t>(size);
 }
 
 ConvertData CurrencyChange::ConvertCurrency()
@@ -124,6 +135,7 @@ void CurrencyChange::CreateSQLUpdateOutput(std::uint32_t mailID)
 
 				outFile << "-- Valor / Justice Point Money Convert" << std::endl;
 				outFile << MoneyPvEUpdate << "\n";
+				++_currentMailID;
 			}
 
 			if (entry.second._moneyUpdatePvP > 1)
@@ -138,6 +150,7 @@ void CurrencyChange::CreateSQLUpdateOutput(std::uint32_t mailID)
 
 				outFile << "-- Conquest / Honor Point Money Convert" << std::endl;
 				outFile << MoneyPvPUpdate << "\n";
+				++_currentMailID;
 			}
 
 			outFile << "-- ---------------------------------------------------------------------------------------" << std::endl << std::endl;

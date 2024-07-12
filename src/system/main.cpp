@@ -17,7 +17,7 @@
 #include "SettingsWindow.h"
 #include "MainFrame.h"
 
-static void customMessageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg)
+static void customMessageHandler(QtMsgType type, const QMessageLogContext& /*context*/, const QString& msg)
 {
 	QFile file("qtlog.txt");
 	file.open(QIODevice::WriteOnly | QIODevice::Append);

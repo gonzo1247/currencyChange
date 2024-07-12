@@ -173,7 +173,6 @@ void MySQLConnection::ConfigTestMySQLConnectionWithSSH(sql::SQLString hostname, 
 	}
 
 	int sock;
-	struct sockaddr_in sin;
 
 	LIBSSH2_SESSION* sshSession;
 	LIBSSH2_CHANNEL* sshChannel;
@@ -565,8 +564,14 @@ void MySQLConnection::printStackTrace()
 
 	// Obtain symbols for each frame
 	SYMBOL_INFO* symbol = (SYMBOL_INFO*)calloc(sizeof(SYMBOL_INFO) + 256 * sizeof(char), 1);
-	symbol->MaxNameLen = 255;
-	symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+
+	if (symbol != nullptr)
+	{
+		symbol->MaxNameLen = 255;
+		symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+	}
+	else
+		return;
 
 	for (int i = 0; i < frames; i++) {
 		SymFromAddr(process, (DWORD64)(addrlist[i]), 0, symbol);

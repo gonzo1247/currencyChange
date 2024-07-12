@@ -1,16 +1,18 @@
 
 #include <QIntValidator>
 #include <QMessageBox>
-#include <QPlainTextEdit>
-#include <QString>
-#include <QRegularExpression>
 
 #include "WoWCurrencyChangeOrReplace.h"
+#include "WindowModulCustom.h"
 
 WoWCurrencyChangeOrReplace::WoWCurrencyChangeOrReplace(std::shared_ptr<Settings> settings, std::shared_ptr<MySQLConnection> connection, QWidget *parent) : QMainWindow(parent),
 _settings(settings), _connection(connection), ui(std::make_unique<Ui::WoWCurrencyChangeOrReplaceClass>()), _settingWindow(nullptr)
 {
     ui->setupUi(this);
+
+#ifdef Q_OS_WIN
+	setDarkTitlebar(reinterpret_cast<HWND>(winId()));
+#endif
 
     QIntValidator* validator = new QIntValidator(this);
     validator->setRange(0, 100);
