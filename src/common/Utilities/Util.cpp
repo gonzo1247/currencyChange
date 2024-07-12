@@ -118,8 +118,6 @@ std::uint32_t Util::ConvertVariantToUInt32(const QVariant& variant)
 	}
 	else
 		return 0;
-
-	return 0;
 }
 
 std::string Util::ReverseString(const std::string& str)

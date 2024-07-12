@@ -212,7 +212,7 @@ std::string Logger::ensurePath(const std::string& desiredPath)
 	return fs::absolute(desiredPath).string();
 }
 
-void Logger::OutMessageImpl(LoggerTypes level, std::string message)
+void Logger::OutMessageImpl(LoggerTypes /*level*/, std::string /*message*/)
 {
 	// WriteLogFile(level, format_str, std::make_format_args(args...));
 }

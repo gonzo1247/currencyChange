@@ -115,7 +115,7 @@ void SettingsWindow::SaveSettings()
 		_isChanged = true;
 	}
 
-	if (ui->cB_Style->currentIndex() != _settings->GetSelectedStyle())
+	if (static_cast<uint32_t>(ui->cB_Style->currentIndex()) != _settings->GetSelectedStyle())
 	{
 		std::uint32_t styleIndex = ui->cB_Style->currentIndex();
 		_settings->UpdateSettingFile(styleThema, std::to_string(styleIndex));
@@ -135,14 +135,14 @@ void SettingsWindow::SaveSettings()
 
 void SettingsWindow::CrypthPassword(std::string password, bool isMySQLP /*= true*/)
 {
-	std::vector<unsigned char> data(password.begin(), password.end());
+	std::vector<unsigned char> passwordData(password.begin(), password.end());
 
 	std::vector<unsigned char> key, iv;
 	_crypto->GenerateRandomKeyAndIV(key, iv, EVP_CIPHER_key_length(EVP_aes_256_cbc()), EVP_CIPHER_iv_length(EVP_aes_256_cbc()));
 
 	_crypto->SaveKeyAndIV(isMySQLP ? _settings->GetMySQLKFP() : _settings->GetSSHKFP(), key, iv);
 
-	std::vector<unsigned char> encryptData = _crypto->EncryptData(data, key, iv);
+	std::vector<unsigned char> encryptData = _crypto->EncryptData(passwordData, key, iv);
 
 	_settings->UpdatePasswordInFile(encryptData, isMySQLP);
 
